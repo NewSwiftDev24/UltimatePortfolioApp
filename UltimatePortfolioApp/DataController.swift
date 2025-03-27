@@ -10,6 +10,8 @@ import CoreData
 class DataController: ObservableObject {
     let container: NSPersistentCloudKitContainer
     
+    @Published var selectedFilter: Filter? = Filter.all
+    
     static var preview: DataController = {
         let dataController = DataController(inMemory: true)
         dataController.createSampleData()
@@ -17,7 +19,7 @@ class DataController: ObservableObject {
     }()
     
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "Main")
+        container = NSPersistentCloudKitContainer(name: "main")
 
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(filePath: "/dev/null")
